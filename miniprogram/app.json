@@ -1,44 +1,17 @@
 {
   "pages": [
-    "pages/ssr/ssr",
-    "pages/task/task",
+    "pages/index/index",
     "pages/card/card",
-    "pages/my/my"
+    "pages/ssr/ssr",
+    "pages/task/task"
   ],
   "window": {
-    "backgroundColor": "#F6F6F6",
+    "backgroundColor": "#f6f6f6",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "云开发 QuickStart",
+    "navigationBarBackgroundColor": "#f6f6f6",
+    "navigationBarTitleText": "",
     "navigationBarTextStyle": "black"
   },
   "sitemapLocation": "sitemap.json",
-  "style": "v2",
-  "tabBar": {
-    "backgroundColor": "#f6f6f6",
-    "color": "#979797",
-    "selectedColor": "#ff7200",
-    "borderStyle": "white",
-    "list": [{
-      "pagePath": "pages/ssr/ssr",
-      "iconPath": "",
-      "selectedIconPath": "",
-      "text": "1"
-    },{
-      "pagePath": "pages/task/task",
-      "iconPath": "",
-      "selectedIconPath": "",
-      "text": "2"
-    },{
-      "pagePath": "pages/card/card",
-      "iconPath": "",
-      "selectedIconPath": "",
-      "text": "3"
-    },{
-      "pagePath": "pages/my/my",
-      "iconPath": "",
-      "selectedIconPath": "",
-      "text": "4"
-    }]
-  }
+  "style": "v2"
 }

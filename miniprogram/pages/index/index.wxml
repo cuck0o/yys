@@ -1,0 +1,26 @@
+<view class="con">
+	<view class="item border">
+    <view class="ani1Con">
+      <image class="ani1" src="/images/ani1.png" animation="{{ani1}}" bindtransitionend="reAnimation1"></image>
+    </view>
+	</view>
+
+  <view class="item border">
+    <view class="ani2Con">
+      <image class="ani2" src="/images/ani2.png" animation="{{ani2}}" bindtransitionend="reAnimation2"></image>
+    </view>
+	</view>
+
+  <view class="item border">
+    <view class="ani3Con">
+      <image class="ani3" src="/images/ani3.png" animation="{{ani3}}" bindtransitionend="reAnimation3"></image>
+    </view>
+	</view>
+
+  <view class="item">
+    <view class="ani4Con">
+      <image class="ani4" src="/images/ani4.png" animation="{{ani4}}" bindtransitionend="reAnimation4"></image>
+    </view>
+	</view>
+</view>
+

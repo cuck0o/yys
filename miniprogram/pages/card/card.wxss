@@ -1,1 +1,5 @@
-/* pages/card/card.wxss */
+.mytab {
+  border-radius: 0;
+  position: fixed;
+  bottom: 40px;
+}
