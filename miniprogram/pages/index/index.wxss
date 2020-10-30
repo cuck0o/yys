@@ -2,7 +2,7 @@
   width: 60%;
   height: auto;
   background-color: white;
-  margin: 0 auto;
+  margin: 0px auto 50px auto;
   border-radius: 0.5rem;
   padding: 30px;
 }
@@ -13,7 +13,6 @@
   padding-top: 20px;
   padding-bottom: 20px;
   font-weight: lighter;
-
 }
 
 .border {
@@ -26,32 +25,32 @@
 }
 
 .ani1Con {
-  width: 154px;
+  width: 143px;
   height: 121px;
-  margin: 50px auto 0;
+  margin: 0px auto;
   overflow: hidden;
   position: relative;
 }
 
 .ani1 {
-  width: 308px;
-  height: 121px;
+  width: 286px;
+  height: 99px;
   position: absolute;
   left: 0;
   bottom: 0;
 }
 
 .ani2Con {
-  width: 167px;
-  height: 176px;
+  width: 152px;
+  height: 156px;
   margin: 50px auto 0;
   overflow: hidden;
   position: relative;
 }
 
 .ani2 {
-  width: 334px;
-  height: 176px;
+  width: 304px;
+  height: 156px;
   position: absolute;
   left: 0;
   bottom: 0;

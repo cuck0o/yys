@@ -1,7 +1,6 @@
 const app = getApp()
 
 Page({
-
   data: {
     ani1: {},
     ani2: {},
@@ -19,13 +18,13 @@ Page({
       duration: 0,
       delay: 500
     });
-    animation1.left(-154).step();
+    animation1.left(-143).step();
     // 动画2
     var animation2 = wx.createAnimation({
       duration: 0,
       delay: 500
     });
-    animation2.left(-167).step();
+    animation2.left(-152).step();
     // 动画3
     var animation3 = wx.createAnimation({
       duration: 0,
@@ -57,7 +56,7 @@ Page({
       delay: 500
     });
     if (this.data.next1) {
-      animation.left(-154).step();
+      animation.left(-143).step();
     } else {
       animation.left(0).step();
     }
@@ -73,7 +72,7 @@ Page({
       delay: 500
     });
     if (this.data.next2) {
-      animation.left(-167).step();
+      animation.left(-152).step();
     } else {
       animation.left(0).step();
     }
