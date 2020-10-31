@@ -15,7 +15,11 @@ Page({
     position3: -145,
     position4: -146,
     userInfo: null,
-    curTouch: -1
+    curTouch: -1,
+    showCreateCard1: false,
+    showCreateCard2: false,
+    showCreateSsr: false,
+    showCreateTask: false,
   },
 
   onLoad: function () {
@@ -226,35 +230,32 @@ Page({
   },
 
   goto() {
-    console.log("here i am", this.data.curTouch, app.globalData.userObj);
+    console.log(this.data.curTouch);
     if (this.data.curTouch != -1) {
-      this.setData({
-        curTouch: -1
-      })
       var curtime = Date.parse(new Date()) / 1000;
-      switch (index) {
-        case 1:
+      switch (this.data.curTouch) {
+        case "1":
           if (app.globalData.userObj.card1.time == 0 || app.globalData.userObj.card1.time <= curtime) {
-            this.creatCard1();
+            this.createCard1();
           } else {
             this.toCard1();
           }
           break;
-        case 2:
+        case "2":
           if (app.globalData.userObj.card2.time == 0 || app.globalData.userObj.card2.time <= curtime) {
-            this.creatCard2();
+            this.createCard2();
           } else {
             this.toCard2();
           }
           break;
-        case 3:
+        case "3":
           if (app.globalData.userObj.ssr.time == 0 || app.globalData.userObj.ssr.time <= curtime) {
-            this.creatSsr();
+            this.createSsr();
           } else {
             this.toSsr();
           }
           break;
-        case 4:
+        case "4":
           if (app.globalData.userObj.task.length <= 0) {
             this.createTask();
           } else {
@@ -262,11 +263,43 @@ Page({
           }
           break;
       }
+      this.setData({
+        curTouch: -1
+      })
     }
   },
 
-  createCard1() {
+  onPopClose() {
+    this.setData({
+      showCreateCard1: false,
+      showCreateCard2: false,
+      showCreateSsr: false,
+      showCreateTask: false,
+    });
+  },
 
+  createCard1() {
+    this.setData({
+      showCreateCard1: true
+    });
+  },
+
+  createCard2() {
+    this.setData({
+      showCreateCard2: true
+    });
+  },
+
+  createSsr() {
+    this.setData({
+      showCreateSsr: true
+    });
+  },
+
+  createTask() {
+    this.setData({
+      showCreateTask: true
+    });
   },
 
   toCard1() {
