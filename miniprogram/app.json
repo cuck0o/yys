@@ -1,7 +1,8 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/card/card",
+    "pages/card1/card1",
+    "pages/card2/card2",
     "pages/ssr/ssr",
     "pages/task/task"
   ],

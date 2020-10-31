@@ -2,30 +2,34 @@
   width: 60%;
   height: auto;
   background-color: white;
-  margin: 0px auto 50px auto;
+  margin: 0px auto 0px auto;
   border-radius: 0.5rem;
-  padding: 30px;
+  padding: 10px;
 }
 
 .item {
   width: 100%;
   text-align: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  font-weight: lighter;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .border {
-  border-bottom: 1px dashed #deee;
+  border-bottom: 1px dashed #eee;
 }
 
 .item .txt {
   width: 100%;
   display: block;
+  margin: 20px auto 0 auto;
+  font-weight: lighter;
+  font-size: 14px;
+  color: #F5C470;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 .ani1Con {
-  width: 143px;
+  width: 140px;
   height: 121px;
   margin: 0px auto;
   overflow: hidden;
@@ -33,7 +37,7 @@
 }
 
 .ani1 {
-  width: 286px;
+  width: 280px;
   height: 99px;
   position: absolute;
   left: 0;
@@ -41,49 +45,48 @@
 }
 
 .ani2Con {
-  width: 152px;
-  height: 156px;
-  margin: 50px auto 0;
+  width: 125px;
+  height: 106px;
+  margin: 0px auto;
   overflow: hidden;
   position: relative;
 }
 
 .ani2 {
-  width: 304px;
-  height: 156px;
+  width: 250px;
+  height: 106px;
   position: absolute;
   left: 0;
   bottom: 0;
 }
 
-
 .ani3Con {
-  width: 166px;
-  height: 149px;
-  margin: 50px auto 0;
+  width: 145px;
+  height: 109px;
+  margin: 0px auto;
   overflow: hidden;
   position: relative;
 }
 
 .ani3 {
-  width: 332px;
-  height: 149px;
+  width: 290px;
+  height: 109px;
   position: absolute;
   left: 0;
   bottom: 0;
 }
 
 .ani4Con {
-  width: 172px;
-  height: 157px;
-  margin: 50px auto 0;
+  width: 146px;
+  height: 107px;
+  margin: 0px auto;
   overflow: hidden;
   position: relative;
 }
 
 .ani4 {
-  width: 342px;
-  height: 157px;
+  width: 292px;
+  height: 107px;
   position: absolute;
   left: 0;
   bottom: 0;
