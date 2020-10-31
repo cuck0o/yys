@@ -3,6 +3,7 @@
     <view class="ani1Con">
       <image class="ani1" src="/images/ani1.png" animation="{{ani1}}" bindtransitionend="reAnimation1"></image>
     </view>
+    <text class="txt">11</text>
 	</view>
 
   <view class="item border">
