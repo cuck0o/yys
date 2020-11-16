@@ -16,10 +16,6 @@ Page({
     position4: -146,
     userInfo: null,
     curTouch: -1,
-    showCreateCard1: false,
-    showCreateCard2: false,
-    showCreateSsr: false,
-    showCreateTask: false,
   },
 
   onLoad: function () {
@@ -124,29 +120,31 @@ Page({
     })
   },
 
-  checkInfo(e) {
+  // 用户登录信息及其授权
+  getUserInfo(e) {
     this.setData({
       curTouch: e.currentTarget.dataset['index']
     })
-    // 用户登录信息（openid获取，基础数据获取，活动数据获取）
     wx.getSetting({
       onGetUserInfo: function (e) {
         if (!this.data.logged && e.detail.userInfo) {
+          app.globalData.nickname = e.detail.userInfo.nickName;
           this.setData({
             logged: true,
-            userInfo: e.detail.userInfo
+            userInfo: e.detail.userInfo,
           })
         }
       },
       success: res => {
+        console.log("登陆：", res)
         if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({
             success: res => {
-              console.log("getUserInfo:", res.userInfo);
               this.setData({
                 userInfo: res.userInfo,
               })
+              app.globalData.nickname = e.detail.userInfo.nickName;
+              console.log("获得授权：", this.data.userInfo);
             }
           })
         }
@@ -165,6 +163,7 @@ Page({
     })
   },
 
+  // 获取用户数据库资料
   getUserData: function () {
     var that = this;
     const db = wx.cloud.database({
@@ -175,7 +174,7 @@ Page({
     }).get({
       success: function (res) {
         if (res.data.length > 0) {
-          console.log("getUserData:", res.data);
+          console.log("获得用户数据库资料:", res.data);
           app.globalData.userObj = res.data[0];
           that.goto();
         } else {
@@ -192,7 +191,7 @@ Page({
     })
   },
 
-  // 新建用户开放信息
+  // 新建用户数据库资料
   createUserData: function () {
     const db = wx.cloud.database({
       env: 'yys-7gws87sn973c67e2'
@@ -214,12 +213,13 @@ Page({
         need: [],
         give: [],
       },
-      task: []
+      task: [],
+      nickname: that.data.userInfo.nickName,
     }
     db.collection('yys').add({
       data: data,
       success: function (res) {
-        console.log("createUserData:", res);
+        console.log("创建用户数据库资料:", res);
         app.globalData.userObj = data;
         that.goto();
       },
@@ -229,77 +229,42 @@ Page({
     })
   },
 
+  // 跳转（先检查用户昵称是否改变，改动更新数据库）
   goto() {
-    console.log(this.data.curTouch);
+    if (app.globalData.userObj.nickname != app.globalData.nickname) {
+      wx.cloud.callFunction({
+        name: 'updateNameOption',
+        data: {
+          id: String(app.globalData.openid),
+          nickname: app.globalData.nickname
+        },
+        success: res => {
+          console.log(res);
+        },
+        fail: err => {
+          console.log(err);
+        },
+      })
+    }
     if (this.data.curTouch != -1) {
-      var curtime = Date.parse(new Date()) / 1000;
       switch (this.data.curTouch) {
         case "1":
-          if (app.globalData.userObj.card1.time == 0 || app.globalData.userObj.card1.time <= curtime) {
-            this.createCard1();
-          } else {
-            this.toCard1();
-          }
+          this.toCard1();
           break;
         case "2":
-          if (app.globalData.userObj.card2.time == 0 || app.globalData.userObj.card2.time <= curtime) {
-            this.createCard2();
-          } else {
-            this.toCard2();
-          }
+          this.toCard2();
           break;
         case "3":
-          if (app.globalData.userObj.ssr.time == 0 || app.globalData.userObj.ssr.time <= curtime) {
-            this.createSsr();
-          } else {
-            this.toSsr();
-          }
+          this.toSsr();
           break;
         case "4":
-          if (app.globalData.userObj.task.length <= 0) {
-            this.createTask();
-          } else {
-            this.toTask();
-          }
+          this.toTask();
           break;
       }
       this.setData({
         curTouch: -1
       })
     }
-  },
-
-  onPopClose() {
-    this.setData({
-      showCreateCard1: false,
-      showCreateCard2: false,
-      showCreateSsr: false,
-      showCreateTask: false,
-    });
-  },
-
-  createCard1() {
-    this.setData({
-      showCreateCard1: true
-    });
-  },
-
-  createCard2() {
-    this.setData({
-      showCreateCard2: true
-    });
-  },
-
-  createSsr() {
-    this.setData({
-      showCreateSsr: true
-    });
-  },
-
-  createTask() {
-    this.setData({
-      showCreateTask: true
-    });
   },
 
   toCard1() {
@@ -324,6 +289,5 @@ Page({
     wx.navigateTo({
       url: '/pages/task/task'
     })
-  },
-
+  }
 })

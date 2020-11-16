@@ -1,2 +1,28 @@
-<!--pages/card1/card1.wxml-->
-<text>pages/card1/card1.wxml</text>
+<view class="table">
+	<view class="tr bg-w">
+		<view class="th">\</view>
+		<view class="th">梅花</view>
+		<view class="th">黑桃</view>
+		<view class="th">方块</view>
+		<view class="th last">红桃</view>
+	</view>
+	<block wx:for="{{listData}}" wx:key="{[code]}">
+		<view class="tr bg-g" wx:if="{{index % 2 == 0}}">
+			<view class="td">{{item.code}}</view>
+			<view class="td" bindtap="onTouch" data-row="{{index}}" data-col="0">{{item.meihua}}</view>
+			<view class="td" bindtap="onTouch" data-row="{{index}}" data-col="1">{{item.heitao}}</view>
+			<view class="td" bindtap="onTouch" data-row="{{index}}" data-col="2">{{item.fangkuai}}</view>
+			<view class="td last" bindtap="onTouch" data-row="{{index}}" data-col="3">{{item.hongtao}}</view>
+		</view>
+		<view class="tr" wx:else>
+			<view class="td">{{item.code}}</view>
+			<view class="td" bindtap="onTouch" data-row="{{index}}" data-col="0">{{item.meihua}}</view>
+			<view class="td" bindtap="onTouch" data-row="{{index}}" data-col="1">{{item.heitao}}</view>
+			<view class="td" bindtap="onTouch" data-row="{{index}}" data-col="2">{{item.fangkuai}}</view>
+			<view class="td last" bindtap="onTouch" data-row="{{index}}" data-col="3">{{item.hongtao}}</view>
+		</view>
+	</block>
+</view>
+
+<button class="btn" wx:if="{{hasChange}}" bindtap="onSubmit">提交修改</button>
+<button class="btn" wx:if="{{hasInfo}}" bindtap="onSearch">开始匹配</button>
