@@ -26,3 +26,16 @@
 
 <button class="btn" wx:if="{{hasChange}}" bindtap="onSubmit">提交修改</button>
 <button class="btn" wx:if="{{hasInfo}}" bindtap="onSearch">开始匹配</button>
+
+<view wx:if="{{ hasResult}}" class="resultCon">
+	<van-divider contentPosition="center">点击一键复制微信昵称，联系TA</van-divider>
+	<view wx:for="{{searchResult}}">
+		<view class="resultItem" bindtap="onCopy" data-name="{{item.name}}">{{item.name}}: 可用 {{item.need}} 兑换TA的 {{item.give}}</view>
+	</view>
+</view>
+
+<van-overlay show="{{ searching }}">
+	<view class="wrapper">
+		<van-loading type="spinner" vertical color="#1989fa" custom-class="loading" />
+	</view>
+</van-overlay>

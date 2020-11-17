@@ -1,10 +1,16 @@
 const app = getApp();
+const db = wx.cloud.database({
+  env: 'yys-7gws87sn973c67e2'
+})
 
 Page({
   data: {
+    searching: false,
+    hasResult: false,
     hasInfo: false,
     hasChange: false,
     searchResult: [],
+    searchIndex: 0,
     listData: [{
         "code": "A",
         "meihua": "",
@@ -228,7 +234,7 @@ Page({
       })
     }
     wx.cloud.callFunction({
-      name: 'updateOption',
+      name: 'updateCard1Option',
       data: {
         id: String(app.globalData.openid),
         data: app.globalData.userObj.card1
@@ -246,27 +252,80 @@ Page({
   },
 
   onSearch: function () {
-    const db = wx.cloud.database({
-      env: 'yys-7gws87sn973c67e2'
+    this.setData({
+      searchIndex: 0,
+      searchResult: [],
+      hasResult: false,
+      searching: true
     })
-    var that = this;
-    console.log("开始匹配");
-    for (var i = 0; i < app.globalData.userObj.card1.need.length; i++) {
-      var finder = app.globalData.userObj.card1.need[i];
-      console.log(finder);
-      db.collection('yys').where({
-        'card1.give': String(finder)
-      }).get({
-        success: res => {
-          that.setData({
-            searchResult: res.data
-          })
-        },
-        fail: err => {
-          console.log(err)
-        }
-      })
-    }
+    this.onSearchResult();
+  },
 
+  onSearchResult: function () {
+    if (this.data.searchIndex >= app.globalData.userObj.card1.need.length) {
+      if (this.data.searchResult.length > 0) {
+        this.setData({
+          hasResult: true,
+          searching: false
+        })
+        wx.pageScrollTo({
+          scrollTop: 300
+        })
+      }
+      return;
+    }
+    var that = this;
+    var finder = app.globalData.userObj.card1.need[this.data.searchIndex];
+    console.log("开始匹配", finder);
+    var tempList = this.data.searchResult;
+    db.collection('yys').where({
+      'card1.give': String(finder)
+    }).get({
+      success: res => {
+        console.log(res.data);
+        for (var k = 0; k < res.data.length; k++) {
+          for (var j = 0; j < res.data[k].card1.need.length; j++) {
+            if (app.globalData.userObj.card1.give.indexOf(res.data[k].card1.need[j]) >= 0) {
+              var obj = {
+                "need": finder,
+                "give": res.data[k].card1.need[j],
+                "name": res.data[k].nickname
+              }
+              tempList.push(obj);
+              console.log(obj);
+            }
+          }
+        }
+        that.setData({
+          searchIndex: this.data.searchIndex += 1,
+          searchResult: tempList
+        })
+        that.onSearchResult();
+      },
+      fail: err => {
+        console.log(err)
+      }
+    })
+  },
+
+  onCloseResult: function () {
+    this.setData({
+      hasResult: false
+    })
+  },
+
+  onCopy: function (e) {
+    var str = e.currentTarget.dataset['name'];
+    wx.setClipboardData({
+      data: str,
+      success(res) {
+        wx.showToast({
+          title: '复制成功',
+          icon: 'success',
+          duration: 2000
+        })
+      }
+    })
   }
+
 })

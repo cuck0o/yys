@@ -275,7 +275,7 @@ Page({
 
   toCard2() {
     wx.navigateTo({
-      url: '/pages/card1/card2'
+      url: '/pages/card2/card2'
     })
   },
 
