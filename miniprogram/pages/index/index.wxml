@@ -18,22 +18,22 @@
 		</view>
 	</button>
 
-	<view class="item border" bindtap="checkInfo" data-index="3">
-		<view class="ani3Con">
-			<image class="ani3" src="/images/ani3.png" animation="{{ani3}}" bindtransitionend="reAnimation3"></image>
+	<button open-type="getUserInfo" bindgetuserinfo="getUserInfo" data-index="3">
+		<view class="item border">
+			<view class="ani3Con">
+				<image class="ani3" src="/images/ani3.png" animation="{{ani3}}" bindtransitionend="reAnimation3"></image>
+			</view>
+			<text class="txt">碎片交换</text>
 		</view>
-		<text class="txt">碎片交换</text>
-	</view>
+	</button>
 
-	<view class="item" bindtap="checkInfo" data-index="4">
-		<view class="ani4Con">
-			<image class="ani4" src="/images/ani4.png" animation="{{ani4}}" bindtransitionend="reAnimation4"></image>
+	<button open-type="getUserInfo" bindgetuserinfo="getUserInfo" data-index="4">
+		<view class="item">
+			<view class="ani4Con">
+				<image class="ani4" src="/images/ani4.png" animation="{{ani4}}" bindtransitionend="reAnimation4"></image>
+			</view>
+			<text class="txt">勾协交换</text>
 		</view>
-		<text class="txt">勾协交换</text>
-	</view>
+	</button>
+
 </view>
-
-<van-popup show="{{ showCreateCard1 }}" position="bottom" custom-style="height: 50%;" bind:close="onPopClose"></van-popup>
-<van-popup show="{{ showCreateCard2 }}" position="bottom" custom-style="height: 50%;" bind:close="onPopClose"></van-popup>
-<van-popup show="{{ showCreateSsr }}" position="bottom" custom-style="height: 50%;" bind:close="onPopClose"></van-popup>
-<van-popup show="{{ showCreateTask }}" position="bottom" custom-style="height: 50%;" bind:close="onPopClose"></van-popup>

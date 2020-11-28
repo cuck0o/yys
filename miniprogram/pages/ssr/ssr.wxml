@@ -1,2 +1,58 @@
-<!--pages/ssr/ssr.wxml-->
-<text>pages/ssr/ssr.wxml</text>
+	<view class="title">我需要的：</view>
+	<van-row>
+		<van-col span="6" custom-class="card" bindtap="onEditor" data-type="0">
+			<van-image round width="3rem" height="3rem" src="https://7979-yys-7gws87sn973c67e2-1304054899.tcb.qcloud.la/editor.png?sign=ef1fc100023f58e03dd9b638dc22060c&t=1606533842" />
+			<view>编辑</view>
+		</van-col>
+		<van-col span="6" wx:for="{{needList}}" wx:key="{[id]}" custom-class="card">
+			<van-image round width="3rem" height="3rem" src="{{item.url}}" />
+			<view>{{item.name}}</view>
+		</van-col>
+	</van-row>
+
+	<view class="title">我提供的:</view>
+	<van-row>
+		<van-col span="6" custom-class="card" bindtap="onEditor" data-type="1">
+			<van-image round width="3rem" height="3rem" src="https://7979-yys-7gws87sn973c67e2-1304054899.tcb.qcloud.la/editor.png?sign=ef1fc100023f58e03dd9b638dc22060c&t=1606533842" />
+			<view>编辑</view>
+		</van-col>
+		<van-col span="6" wx:for="{{giveList}}" wx:key="{[id]}" custom-class="card">
+			<van-image round width="3rem" height="3rem" src="{{item.url}}" />
+			<view>{{item.name}}</view>
+		</van-col>
+	</van-row>
+
+	<button class="btn" bindtap="onSubmit">开始匹配</button>
+
+	<!-- 我需要的编辑 -->
+	<van-popup show="{{ needShow }}" round position="bottom" custom-style="height: 80%" bind:close="onClose" custom-class="pop">
+		<van-row>
+			<van-col span="6" wx:for="{{list}}" wx:key="{[id]}" custom-class="card" bindtap="onChange" data-index="{{index}}">
+				<view class="select" wx:if="{{item.needSelect}}">
+					<van-image round width=" 3rem" height="3rem" src="{{item.url}}" custom-class="img" />
+					<view>{{item.name}}</view>
+				</view>
+				<view wx:else>
+					<van-image round width=" 3rem" height="3rem" src="{{item.url}}" custom-class="img" />
+					<view>{{item.name}}</view>
+				</view>
+			</van-col>
+		</van-row>
+	</van-popup>
+
+
+	<!-- 我提供的编辑 -->
+	<van-popup show="{{ giveShow }}" round position="bottom" custom-style="height: 80%" bind:close="onClose" custom-class="pop">
+		<van-row>
+			<van-col span="6" wx:for="{{list}}" wx:key="{[id]}" custom-class="card" bindtap="onChange" data-index="{{index}}">
+				<view class=" select" wx:if="{{item.giveSelect}}">
+					<van-image round width=" 3rem" height="3rem" src="{{item.url}}" custom-class="img" />
+					<view>{{item.name}}</view>
+				</view>
+				<view wx:else>
+					<van-image round width=" 3rem" height="3rem" src="{{item.url}}" custom-class="img" />
+					<view>{{item.name}}</view>
+				</view>
+			</van-col>
+		</van-row>
+	</van-popup>
