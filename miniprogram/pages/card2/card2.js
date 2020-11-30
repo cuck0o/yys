@@ -7,9 +7,8 @@ Page({
   data: {
     searching: false,
     hasResult: false,
-    hasInfo: false,
-    hasChange: false,
     searchResult: [],
+    resultShow: false,
     searchIndex: 0,
     listData: [{
         "code": "A",
@@ -144,11 +143,6 @@ Page({
           break;
       }
     }
-    if (app.globalData.userObj.card2.give.length > 0 || app.globalData.userObj.card2.need.length > 0) {
-      this.setData({
-        hasInfo: true
-      })
-    }
     this.setData({
       listData: temp
     })
@@ -193,8 +187,7 @@ Page({
         break;
     }
     this.setData({
-      listData: temp,
-      hasChange: true
+      listData: temp
     })
   },
 
@@ -224,59 +217,34 @@ Page({
         app.globalData.userObj.card2.give.push(i + "," + "3");
       }
     }
-    if (app.globalData.userObj.card2.give.length > 0 || app.globalData.userObj.card2.need.length > 0) {
-      this.setData({
-        hasInfo: true
-      })
-    } else {
-      this.setData({
-        hasInfo: false
-      })
-    }
     wx.cloud.callFunction({
-      name: 'updatecard2Option',
+      name: 'updateCard2Option',
       data: {
         id: String(app.globalData.openid),
         data: app.globalData.userObj.card2
-      },
-      success: res => {
-        console.log(res);
-        that.setData({
-          hasChange: false
-        })
-      },
-      fail: err => {
-        console.log(err);
-      },
+      }
     })
-  },
-
-  onSearch: function () {
     this.setData({
       searchIndex: 0,
       searchResult: [],
       hasResult: false,
       searching: true
     })
-    this.onSearchResult();
+    this.onSearch();
   },
 
-  onSearchResult: function () {
+  onSearch: function () {
     if (this.data.searchIndex >= app.globalData.userObj.card2.need.length) {
-      if (this.data.searchResult.length > 0) {
-        this.setData({
-          hasResult: true,
-          searching: false
-        })
-        wx.pageScrollTo({
-          scrollTop: 300
-        })
-      }
+      this.setData({
+        searching: false,
+        resultShow: true,
+        hasResult: this.data.searchResult.length > 0 ? true : false
+      })
       return;
     }
     var that = this;
     var finder = app.globalData.userObj.card2.need[this.data.searchIndex];
-    console.log("开始匹配", finder);
+    console.log("card2开始匹配", finder);
     var tempList = this.data.searchResult;
     db.collection('yys').where({
       'card2.give': String(finder)
@@ -300,7 +268,7 @@ Page({
           searchIndex: this.data.searchIndex += 1,
           searchResult: tempList
         })
-        that.onSearchResult();
+        that.onSearch();
       },
       fail: err => {
         console.log(err)
@@ -308,9 +276,9 @@ Page({
     })
   },
 
-  onCloseResult: function () {
+  onClose: function () {
     this.setData({
-      hasResult: false
+      resultShow: false
     })
   },
 
