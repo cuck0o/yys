@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "van-image": "../../vant-weapp-dev/dist/image/index"
+    "van-image": "../../vant-weapp-dev/dist/image/index",
+    "van-loading": "../../vant-weapp-dev/dist/loading/index"
   }
 }

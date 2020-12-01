@@ -1,8 +1,14 @@
+.loadbar {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
 .con {
   width: 60%;
   height: auto;
   background-color: white;
-  margin: 0px auto 0px auto;
+  margin: 30px auto 0px auto;
   border-radius: 0.5rem;
   padding: 10px;
 }

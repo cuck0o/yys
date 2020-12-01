@@ -163,8 +163,8 @@ Page({
           for (var j = 0; j < res.data[k].ssr.need.length; j++) {
             if (app.globalData.userObj.ssr.give.indexOf(res.data[k].ssr.need[j]) >= 0) {
               var obj = {
-                "need": finder,
-                "give": res.data[k].ssr.need[j],
+                "need": that.getNameByID(finder),
+                "give": that.getNameByID(res.data[k].ssr.need[j]),
                 "name": res.data[k].nickname
               }
               tempList.push(obj);
@@ -182,6 +182,15 @@ Page({
         console.log(err)
       }
     })
+  },
+
+  getNameByID: function (id) {
+    for (var i = 0; i < this.data.list.length; i++) {
+      if (id == this.data.list[i].id) {
+        return this.data.list[i].name;
+      }
+    }
+    return ""
   },
 
   onClose: function () {

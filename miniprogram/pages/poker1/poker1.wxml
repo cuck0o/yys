@@ -1,3 +1,7 @@
+	<view class="img" bindtap="clickImg">
+		<van-image round width="8rem" height="8rem" src="https://7979-yys-7gws87sn973c67e2-1304054899.tcb.qcloud.la/ygwpoker.png?sign=0c58ece582d3816d673edbfeca4e7d02&t=1606794766"/>
+	</view>
+
 	<view class="title">我需要的：</view>
 	<van-row>
 		<van-col span="6" custom-class="card" bindtap="onEditor" data-type="0">
@@ -40,7 +44,6 @@
 		</van-row>
 	</van-popup>
 
-
 	<!-- 我提供的编辑 -->
 	<van-popup show="{{ giveShow }}" round position="bottom" custom-style="height: 80%" bind:close="onClose" custom-class="pop">
 		<van-row>
@@ -56,7 +59,6 @@
 			</van-col>
 		</van-row>
 	</van-popup>
-
 
 	<!-- 结果 -->
 	<van-popup show="{{ resultShow }}" round position="bottom" custom-style="height: 80%" bind:close="onClose" custom-class="pop">

@@ -1,4 +1,5 @@
-const app = getApp()
+const app = getApp();
+var isTouch = false;
 
 Page({
   data: {
@@ -122,6 +123,10 @@ Page({
 
   // 用户登录信息及其授权
   getUserInfo(e) {
+    if (isTouch) {
+      return;
+    }
+    isTouch = true;
     this.setData({
       curTouch: e.currentTarget.dataset['index']
     })
@@ -247,6 +252,7 @@ Page({
       })
     }
     if (this.data.curTouch != -1) {
+      isTouch = false;
       switch (this.data.curTouch) {
         case "1":
           this.toCard1();
@@ -269,13 +275,13 @@ Page({
 
   toCard1() {
     wx.navigateTo({
-      url: '/pages/card1/card1'
+      url: '/pages/poker1/poker1'
     })
   },
 
   toCard2() {
     wx.navigateTo({
-      url: '/pages/card2/card2'
+      url: '/pages/poker2/poker2'
     })
   },
 

@@ -6,6 +6,31 @@ cloud.init()
 // 云函数入口函数
 exports.main = async (event, context) => {
   const list = [{
+    id: 217,
+    type: "ssr",
+    name: "大天狗",
+    url: "https://7979-yys-7gws87sn973c67e2-1304054899.tcb.qcloud.la/217.png?sign=906825e708f516f8e83dd9039b07011d&t=1606809748"
+  }, {
+    id: 219,
+    type: "ssr",
+    name: "酒吞",
+    url: "https://7979-yys-7gws87sn973c67e2-1304054899.tcb.qcloud.la/219.png?sign=de9f7746946b1e270f64386a5ceeed33&t=1606809782"
+  }, {
+    id: 248,
+    type: "ssr",
+    name: "荒川",
+    url: "https://7979-yys-7gws87sn973c67e2-1304054899.tcb.qcloud.la/248.png?sign=ff559a87bcf3fd06712504189546b444&t=1606809800"
+  }, {
+    id: 255,
+    type: "ssr",
+    name: "阎魔",
+    url: "https://7979-yys-7gws87sn973c67e2-1304054899.tcb.qcloud.la/255.png?sign=5384be07f9603ea31576d59448e51c0b&t=1606809823"
+  }, {
+    id: 259,
+    type: "ssr",
+    name: "小鹿男",
+    url: "https://7979-yys-7gws87sn973c67e2-1304054899.tcb.qcloud.la/259.png?sign=2bdbcff7461a443c9fa61e6e92a00523&t=1606809846"
+  }, {
     id: 265,
     type: "ssr",
     name: "茨木",

@@ -1,6 +1,4 @@
 .card {
-  width: 60px;
-  height: 60px;
   text-align: center;
   font-size: 12px;
   margin-bottom: 15px;
@@ -45,4 +43,9 @@
   margin: 10px auto;
   display: block;
   border: 1px solid #333;
+}
+
+.img {
+  text-align: center;
+  margin: 5px auto;
 }
