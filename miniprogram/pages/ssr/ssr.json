@@ -6,6 +6,9 @@
     "van-popup": "../../vant-weapp-dev/dist/popup/index",
     "van-divider": "../../vant-weapp-dev/dist/divider/index",
     "van-loading": "../../vant-weapp-dev/dist/loading/index",
-    "van-overlay": "../../vant-weapp-dev/dist/overlay/index"
+    "van-overlay": "../../vant-weapp-dev/dist/overlay/index",
+    "van-dialog": "../../vant-weapp-dev/dist/dialog/index",
+    "van-field": "../../vant-weapp-dev/dist/field/index",
+    "van-notice-bar": "../../vant-weapp-dev/dist/notice-bar/index"
   }
 }

@@ -41,3 +41,12 @@
 	</button>
 
 </view>
+
+<button class="set" open-type="getUserInfo" bindgetuserinfo="getUserInfo" data-index="0">
+	<van-icon name="setting-o" size="20px" />
+</button>
+
+<van-dialog use-slot title="设置" show="{{ showSet }}" show-cancel-button bind:close="onSetClose" bind:confirm="onSetSave">
+	<van-notice-bar wrapable text="请填入任何可联系到你的方式后进行匹配..." />
+	<van-field value="{{ contact }}" label="联系方式" placeholder="请输入微信号/手机号" bind:change="onSetChange" />
+</van-dialog>

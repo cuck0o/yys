@@ -17,6 +17,8 @@ Page({
     position4: -146,
     userInfo: null,
     curTouch: -1,
+    showSet: false,
+    contact: ""
   },
 
   onLoad: function () {
@@ -133,7 +135,6 @@ Page({
     wx.getSetting({
       onGetUserInfo: function (e) {
         if (!this.data.logged && e.detail.userInfo) {
-          app.globalData.nickname = e.detail.userInfo.nickName;
           this.setData({
             logged: true,
             userInfo: e.detail.userInfo,
@@ -141,14 +142,13 @@ Page({
         }
       },
       success: res => {
-        console.log("登陆：", res)
+        console.log("登陆：", res);
         if (res.authSetting['scope.userInfo']) {
           wx.getUserInfo({
             success: res => {
               this.setData({
                 userInfo: res.userInfo,
               })
-              app.globalData.nickname = e.detail.userInfo.nickName;
               console.log("获得授权：", this.data.userInfo);
             }
           })
@@ -219,7 +219,7 @@ Page({
         give: [],
       },
       task: [],
-      nickname: that.data.userInfo.nickName,
+      nickname: "",
     }
     db.collection('yys').add({
       data: data,
@@ -236,24 +236,15 @@ Page({
 
   // 跳转（先检查用户昵称是否改变，改动更新数据库）
   goto() {
-    if (app.globalData.userObj.nickname != app.globalData.nickname) {
-      wx.cloud.callFunction({
-        name: 'updateNameOption',
-        data: {
-          id: String(app.globalData.openid),
-          nickname: app.globalData.nickname
-        },
-        success: res => {
-          console.log(res);
-        },
-        fail: err => {
-          console.log(err);
-        },
-      })
-    }
+    this.setData({
+      contact: app.globalData.userObj.nickname
+    })
     if (this.data.curTouch != -1) {
       isTouch = false;
       switch (this.data.curTouch) {
+        case "0":
+          this.onSetShow();
+          break;
         case "1":
           this.toCard1();
           break;
@@ -295,5 +286,44 @@ Page({
     wx.navigateTo({
       url: '/pages/task/task'
     })
-  }
+  },
+
+  onSetShow() {
+    this.setData({
+      showSet: true
+    });
+  },
+
+  onSetClose() {
+    this.setData({
+      showSet: false
+    });
+  },
+
+  onSetChange(e) {
+    this.setData({
+      contact: e.detail
+    })
+  },
+
+  onSetSave() {
+    if (this.data.contact != "" && this.data.contact != app.globalData.userObj.nickname) {
+      app.globalData.userObj.nickname = this.data.contact;
+      wx.cloud.callFunction({
+        name: 'updateNameOption',
+        data: {
+          id: String(app.globalData.openid),
+          nickname: app.globalData.userObj.nickname
+        },
+        success: res => {
+          console.log(res);
+        },
+        fail: err => {
+          console.log(err);
+        },
+      })
+    }
+  },
+
+
 })

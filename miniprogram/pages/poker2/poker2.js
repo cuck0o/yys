@@ -326,7 +326,9 @@ Page({
     searchResult: [],
     searching: false,
     resultShow: false,
-    hasResult: false
+    hasResult: false,
+    showSet: false,
+    contact: ""
   },
 
   onLoad: function (options) {
@@ -406,6 +408,10 @@ Page({
   },
 
   onSubmit: function () {
+    if (app.globalData.userObj.nickname == "") {
+      this.onSetShow();
+      return;
+    }
     var that = this;
     app.globalData.userObj.card2.give = [];
     for (var i = 0; i < this.data.giveList.length; i++) {
@@ -451,6 +457,9 @@ Page({
       success: res => {
         console.log(res.data);
         for (var k = 0; k < res.data.length; k++) {
+          if (res.data[k]._openid == app.globalData.openid) {
+            continue;
+          }
           for (var j = 0; j < res.data[k].card2.need.length; j++) {
             if (app.globalData.userObj.card2.give.indexOf(res.data[k].card2.need[j]) >= 0) {
               var obj = {
@@ -459,7 +468,6 @@ Page({
                 "name": res.data[k].nickname
               }
               tempList.push(obj);
-              console.log(obj);
             }
           }
         }
@@ -511,6 +519,44 @@ Page({
       current: 'https://7979-yys-7gws87sn973c67e2-1304054899.tcb.qcloud.la/sspoker.png?sign=b1c7f9673bd1ca3793abf9c03f0f2631&t=1606795189', // 当前显示图片的http链接
       urls: ['https://7979-yys-7gws87sn973c67e2-1304054899.tcb.qcloud.la/sspoker.png?sign=b1c7f9673bd1ca3793abf9c03f0f2631&t=1606795189'] // 需要预览的图片http链接列表
     })
+  },
+
+  onSetShow() {
+    this.setData({
+      showSet: true
+    });
+  },
+
+  onSetClose() {
+    this.setData({
+      showSet: false
+    });
+  },
+
+  onSetChange(e) {
+    this.setData({
+      contact: e.detail
+    })
+  },
+
+  onSetSave() {
+    if (this.data.contact != "" && this.data.contact != app.globalData.userObj.nickname) {
+      app.globalData.userObj.nickname = this.data.contact;
+      this.onSubmit();
+      wx.cloud.callFunction({
+        name: 'updateNameOption',
+        data: {
+          id: String(app.globalData.openid),
+          nickname: app.globalData.userObj.nickname
+        },
+        success: res => {
+          console.log(res);
+        },
+        fail: err => {
+          console.log(err);
+        },
+      })
+    }
   },
 
 })

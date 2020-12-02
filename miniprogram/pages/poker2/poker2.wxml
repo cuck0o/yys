@@ -1,5 +1,5 @@
 	<view class="img" bindtap="clickImg">
-		<van-image round width="8rem" height="8rem" src="https://7979-yys-7gws87sn973c67e2-1304054899.tcb.qcloud.la/sspoker.png?sign=b1c7f9673bd1ca3793abf9c03f0f2631&t=1606795189"/>
+		<van-image round width="8rem" height="8rem" src="https://7979-yys-7gws87sn973c67e2-1304054899.tcb.qcloud.la/sspoker.png?sign=b1c7f9673bd1ca3793abf9c03f0f2631&t=1606795189" />
 	</view>
 
 	<view class="title">我需要的：</view>
@@ -78,3 +78,8 @@
 			<van-loading type="spinner" vertical color="#1989fa" custom-class="loading" />
 		</view>
 	</van-overlay>
+
+	<van-dialog use-slot title="设置" show="{{ showSet }}" show-cancel-button bind:close="onSetClose" bind:confirm="onSetSave">
+		<van-notice-bar wrapable text="请填入任何可联系到你的方式后进行匹配..." />
+		<van-field value="{{ contact }}" label="联系方式" placeholder="请输入微信号/手机号" bind:change="onSetChange" />
+	</van-dialog>

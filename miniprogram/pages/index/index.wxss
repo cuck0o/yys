@@ -97,3 +97,9 @@
   left: 0;
   bottom: 0;
 }
+
+.set {
+  position: fixed;
+  right: -50px;
+  bottom: 15px;
+}
