@@ -46,3 +46,15 @@
   display: block;
   border: 1px solid #333;
 }
+
+.shareBtn[plain] {
+  border: solid 1px #333;
+  margin: 30px auto;
+  font-weight: lighter;
+}
+
+.shareTxt {
+  font-size: 14px;
+  font-weight: lighter;
+  color: #333;
+}

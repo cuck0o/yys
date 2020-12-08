@@ -559,5 +559,13 @@ Page({
     }
   },
 
+  onShareAppMessage: function (options) {
+    var shareObj = {
+      title: "来和我匹配一下妖怪屋卡牌吧",
+      path: '/pages/index/index',
+      imgUrl: 'https://7979-yys-7gws87sn973c67e2-1304054899.tcb.qcloud.la/shareImg.png?sign=9642004a7f754320b67ebca786130c7f&t=1607046570'
+    }
+    return shareObj;
+  },
 
 })
